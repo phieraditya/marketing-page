@@ -14,6 +14,8 @@ const tabContainer = document.querySelector('.operations__tab-container');
 const tabs = document.querySelectorAll('.operations__tab');
 const tabsContent = document.querySelectorAll('.operations__content');
 
+const header = document.querySelector('.header');
+
 /////////////////////////////////////////////////////////////////
 // Modal window
 const openModal = function (e) {
@@ -58,3 +60,19 @@ document.addEventListener('keydown', function (e) {
 
 /////////////////////////////////////////////////////////////////
 // Slider
+
+/////////////////////////////////////////////////////////////////
+// Cookie
+
+const message = document.createElement('div');
+message.classList.add('cookie-message');
+message.innerHTML =
+  'We use cookies for improved functionality and analytics. <button class="btn btn--close-cookie">Got it!</button>';
+
+header.append(message);
+
+document
+  .querySelector('.btn--close-cookie')
+  .addEventListener('click', function () {
+    message.remove();
+  });
