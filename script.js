@@ -13,6 +13,7 @@ const section1 = document.querySelector('#section--1');
 const navLinks = document.querySelector('.nav__links');
 
 const nav = document.querySelector('.nav');
+
 const tabContainer = document.querySelector('.operations__tab-container');
 const tabs = document.querySelectorAll('.operations__tab');
 const tabsContent = document.querySelectorAll('.operations__content');
@@ -59,6 +60,24 @@ navLinks.addEventListener('click', function (e) {
 
 /////////////////////////////////////////////////////////////////
 // Tabbed component
+tabContainer.addEventListener('click', function (e) {
+  const clicked = e.target.closest('.operations__tab');
+
+  // Guard clause - for click outside tab
+  if (!clicked) return;
+
+  // Activate tab
+  tabs.forEach(t => t.classList.remove('operations__tab--active'));
+  clicked.classList.add('operations__tab--active');
+
+  // Activate content area
+  tabsContent.forEach(content =>
+    content.classList.remove('operations__content--active')
+  );
+  document
+    .querySelector(`.operations__content--${clicked.dataset.tab}`)
+    .classList.add('operations__content--active');
+});
 
 /////////////////////////////////////////////////////////////////
 // Menu fade animation
