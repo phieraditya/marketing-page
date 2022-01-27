@@ -168,9 +168,20 @@ imgTargets.forEach(img => imgObserver.observe(img));
 const slides = document.querySelectorAll('.slide');
 const btnLeft = document.querySelector('.slider__btn--left');
 const btnRight = document.querySelector('.slider__btn--right');
+const dotsContainer = document.querySelector('.dots');
 
 let curSlide = 0;
 const maxSLide = slides.length;
+
+const createDots = function () {
+  slides.forEach((_, i) => {
+    dotsContainer.insertAdjacentHTML(
+      'beforeend',
+      `<button class="dots__dot" data-slide="${i}"></button>`
+    );
+  });
+};
+createDots();
 
 const goToSlide = function (slide) {
   slides.forEach(
@@ -201,6 +212,12 @@ document.addEventListener('keydown', function (e) {
   e.key === 'ArrowLeft' && prevSlide();
 });
 
+dotsContainer.addEventListener('click', function (e) {
+  if (e.target.classList.contains('dots__dot')) {
+    const { slide } = e.target.dataset;
+    goToSlide(slide);
+  }
+});
 /////////////////////////////////////////////////////////////////
 // Cookie
 
