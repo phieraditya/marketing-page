@@ -176,15 +176,18 @@ const slider = document.querySelector('.slider');
 slider.style.transform = 'scale(0.5) translateX(-700px)';
 slider.style.overflow = 'visible';
 
-slides.forEach((s, i) => (s.style.transform = `translateX(${100 * i}%)`));
+const goToSlide = function (slide) {
+  slides.forEach(
+    (s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`)
+  );
+};
+goToSlide(0);
 
 btnRight.addEventListener('click', function () {
   if (curSlide === maxSLide - 1) curSlide = 0;
   else curSlide++;
 
-  slides.forEach(
-    (s, i) => (s.style.transform = `translateX(${100 * (i - curSlide)}%)`)
-  );
+  goToSlide(curSlide);
 });
 
 /////////////////////////////////////////////////////////////////
