@@ -172,10 +172,6 @@ const btnRight = document.querySelector('.slider__btn--right');
 let curSlide = 0;
 const maxSLide = slides.length;
 
-const slider = document.querySelector('.slider');
-slider.style.transform = 'scale(0.5) translateX(-700px)';
-slider.style.overflow = 'visible';
-
 const goToSlide = function (slide) {
   slides.forEach(
     (s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`)
@@ -183,12 +179,22 @@ const goToSlide = function (slide) {
 };
 goToSlide(0);
 
-btnRight.addEventListener('click', function () {
+const nextSlide = function () {
   if (curSlide === maxSLide - 1) curSlide = 0;
   else curSlide++;
 
   goToSlide(curSlide);
-});
+};
+
+const prevSlide = function () {
+  if (curSlide === 0) curSlide = maxSLide - 1;
+  else curSlide--;
+
+  goToSlide(curSlide);
+};
+
+btnRight.addEventListener('click', nextSlide);
+btnLeft.addEventListener('click', prevSlide);
 
 /////////////////////////////////////////////////////////////////
 // Cookie
